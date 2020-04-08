@@ -3,6 +3,6 @@ stages:
 
 job 1:
   stage: build
-  branch: master
+  only: master
   script: echo 'test'
 
