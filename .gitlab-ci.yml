@@ -3,5 +3,6 @@ stages:
 
 job1:
   stage: build
-  script: echo 'test'
+  script: 
+  - pwd
 
