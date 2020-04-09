@@ -13,10 +13,10 @@ test:
    - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
    - ssh ubuntu@192.168.0.111 /bin/bash << EOT
-     ls
-     pwd
-     hostname
-     EOT
+   - ls
+   - pwd
+   - hostname
+   - EOT
 
 build_image:
   stage: build_image
