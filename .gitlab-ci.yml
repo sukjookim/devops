@@ -20,6 +20,6 @@ build_container:
    - ssh-add <(echo "$SSH_PRIVATE_KEY")
    - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
-   - ssh ubuntu@192.168.0.111 cd /home/ubuntu/website && pwd
+   - ssh ubuntu@192.168.0.111 /home/ubuntu/website/docker-compose up
      # "DATE=date_$(date '+%Y%m%d') VERSION=$(git rev-parse HEAD | cut -c1-5) /home/ubuntu/website/docker-compose up -d"
 
