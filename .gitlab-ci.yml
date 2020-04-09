@@ -21,12 +21,9 @@ build_container1:
    - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
    - ssh ubuntu@192.168.0.111 /bin/bash << EOT
-   - cd website
    - docker-compose down
-   - sleep 10
    - DATE=d$(date "+%Y%m%d") VERSION=$(git rev-parse HEAD | cut -c1-5) docker-compose up -d
    - EOT
-   - sleep 10
 
 build_container2:
   stage: build_container2
