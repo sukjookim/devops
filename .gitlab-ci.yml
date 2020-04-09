@@ -12,10 +12,11 @@ test:
    - ssh-add <(echo "$SSH_PRIVATE_KEY")
    - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
-   - ssh -tt ubuntu@192.168.0.111
-   - ll
-   - pwd
-   - hostname
+   - ssh ubuntu@192.168.0.111 /bin/bash << EOF
+     ll
+     pwd
+     hostname
+     EOF
 
 build_image:
   stage: build_image
