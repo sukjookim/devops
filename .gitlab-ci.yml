@@ -24,8 +24,8 @@ build_container1:
    - cd website
    - docker-compose down
    - DATE=d$(date "+%Y%m%d") VERSION=$(git rev-parse HEAD | cut -c1-5) docker-compose up -d
-   - sleep 20
    - EOT
+   - sleep 10
 
 build_container2:
   stage: build_container2
