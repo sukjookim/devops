@@ -14,7 +14,7 @@ build_image:
 
 build_container:
   stage: build_container
-  when: manaul
+  when: manual
   before_script:
    - eval $(ssh-agent -s)
    - ssh-add <(echo "$SSH_PRIVATE_KEY")
