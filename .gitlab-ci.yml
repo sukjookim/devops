@@ -6,7 +6,7 @@ stages:
 build_image:
   stage: build_image
   when: manual
-  #allow_failure: false
+  allow_failure: false
   script:
   - echo "Login to Nexus Docker Registry"
   - echo "$NEXUS_PASSWORD" | docker login 192.168.0.112:8082 -u "admin" --password-stdin
