@@ -23,7 +23,7 @@ build_container1:
    - ssh ubuntu@192.168.0.111 /bin/bash << EOT
    - cd website
    - docker-compose down
-   - DATE=d$(date '+%Y%m%d') VERSION=$(git rev-parse HEAD | cut -c1-5) docker-compose up -d
+   - DATE=d$(date "+%Y%m%d") VERSION=$(git rev-parse HEAD | cut -c1-5) docker-compose up -d
    - sleep 20
    - EOT
 
@@ -37,5 +37,5 @@ build_container2:
   script:
    - ssh ubuntu@192.168.0.113 /bin/bash << EOT 
    - docker-compose down
-   - DATE=d$(date '+%Y%m%d') VERSION=$(git rev-parse HEAD | cut -c1-5) docker-compose up -d
+   - DATE=d$(date "+%Y%m%d") VERSION=$(git rev-parse HEAD | cut -c1-5) docker-compose up -d
    - EOT
