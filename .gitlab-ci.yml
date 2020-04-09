@@ -12,8 +12,8 @@ build_image:
   - echo "$NEXUS_PASSWORD" | docker login 192.168.0.112:8082 -u "admin" --password-stdin
   - bash ./nexus_image_push.sh "date_$(date '+%Y%m%d')" "$(git rev-parse HEAD | cut -c1-5)"
 
-build_image:
-  stage: ssh_worker
+build_container:
+  stage: build_container
   when: manaul
   before_script:
    - eval $(ssh-agent -s)
