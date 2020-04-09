@@ -1,22 +1,7 @@
 stages:
-  - test
   - build_image
   - build_container1
   - build_container2
-
-test:
-  stage: test
-  when: manual
-  before_script:
-   - eval $(ssh-agent -s)
-   - ssh-add <(echo "$SSH_PRIVATE_KEY")
-   - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-  script:
-   - ssh ubuntu@192.168.0.111 /bin/bash << EOT
-   - ls
-   - pwd
-   - hostname
-   - EOT
 
 build_image:
   stage: build_image
@@ -35,9 +20,12 @@ build_container1:
    - ssh-add <(echo "$SSH_PRIVATE_KEY")
    - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
-   - ssh ubuntu@192.168.0.111 "docker-compose down"
-   - ssh ubuntu@192.168.0.111 "DATE=d$(date '+%Y%m%d') VERSION=$(git rev-parse HEAD | cut -c1-5) docker-compose up -d"
+   - ssh ubuntu@192.168.0.111 /bin/bash << EOT
+   - cd website
+   - docker-compose down
+   - DATE=d$(date '+%Y%m%d') VERSION=$(git rev-parse HEAD | cut -c1-5) docker-compose up -d
    - sleep 20
+   - EOT
 
 build_container2:
   stage: build_container2
@@ -47,5 +35,7 @@ build_container2:
    - ssh-add <(echo "$SSH_PRIVATE_KEY")
    - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
-   - ssh ubuntu@192.168.0.113 "docker-compose down"
-   - ssh ubuntu@192.168.0.113 "DATE=d$(date '+%Y%m%d') VERSION=$(git rev-parse HEAD | cut -c1-5) docker-compose up -d"
+   - ssh ubuntu@192.168.0.113 /bin/bash << EOT 
+   - docker-compose down
+   - DATE=d$(date '+%Y%m%d') VERSION=$(git rev-parse HEAD | cut -c1-5) docker-compose up -d
+   - EOT
