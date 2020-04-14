@@ -24,7 +24,7 @@ build_container1:
    - docker-compose down
    - DATE=d$(date "+%Y%m%d") VERSION=$(git rev-parse HEAD | cut -c1-5) docker-compose up -d
    - docker system prune -f
-   - docker rmi -f $(docker images | grep website | awk '{print $3}') 2> /dev/null  
+   - docker images -a | grep "website" | awk '{print $3}' | xargs docker rmi 2> /dev/null
    - EOT
 
 build_container2:
@@ -39,5 +39,5 @@ build_container2:
    - docker-compose down
    - DATE=d$(date "+%Y%m%d") VERSION=$(git rev-parse HEAD | cut -c1-5) docker-compose up -d
    - docker system prune -f
-   - docker rmi -f $(docker images | grep website | awk '{print $3}') 2> /dev/null  
+   - docker images -a | grep "website" | awk '{print $3}' | xargs docker rmi 2> dev/null
    - EOT
